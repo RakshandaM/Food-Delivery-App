@@ -1,4 +1,4 @@
-import { CDN_URL , LOGO_URL } from "./utils/contants"; 
+import { CDN_URL } from "./utils/contants"; 
 
 const RestaurantCard = (props) => {
     //const { resData } = props; //resData - (For each [acting as a props])
@@ -18,6 +18,6 @@ const RestaurantCard = (props) => {
         <h4>{ props.resData.data.avgRating } Ratings</h4>
       </div>
     );
-  };
+};
 
-  export default RestaurantCard;
+export default RestaurantCard;

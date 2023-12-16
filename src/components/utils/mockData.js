@@ -1,7 +1,7 @@
 //API (JSON) of "Swiggy"
 
 
-const resList= [
+let resList= [
     {
       type: "restaurant",
       data: {
