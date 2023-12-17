@@ -14,15 +14,14 @@ const Body = () => {
   async function fetchData() {
     const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.2403305&lng=73.1305395&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
     const json = await data.json();
-    console.log(json);
+    console.log( " Hey API !! ",json);
+    //setlistOfResturants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   }
-
   //Body Render first then useEffect()
   
   return (
       <div className="body">
         <div className="filter">
-          
           <button
             className="filter-btn"
             onClick={() => {
@@ -33,9 +32,7 @@ const Body = () => {
             }}  
           >
           Top Rated Restaurant
-          </button>
-        
-      
+          </button>   
           </div>
       <div className="res-container">
         {
@@ -49,5 +46,6 @@ const Body = () => {
     </div>
   );
 };
+
 
 export default Body;
