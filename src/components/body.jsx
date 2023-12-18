@@ -1,12 +1,14 @@
 import RestaurantCard from "./Resturant Card";
-import resList from "./utils/mockData";
 import {useState, useEffect} from "react";
+import Shimmer from "./Shimmer";
 
 
 const Body = () => {
 
   const [listOfResturants, setlistOfResturants]=useState([ ])
   
+  
+  //  Body Render first then useEffect()
   useEffect(()=>{
     fetchData();
   })
@@ -17,12 +19,13 @@ const Body = () => {
    // console.log( " Hey API !! ",json);
     setlistOfResturants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     //console.log(listOfResturants)
-
- 
   }
-  //Body Render first then useEffect()
-  
-  return (
+
+
+
+  return listOfResturants.length === 0 ? 
+  (<Shimmer/>) :
+  (
       <div className="body">
         <div className="filter">
           <button
