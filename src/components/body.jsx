@@ -4,26 +4,29 @@ import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [listOfResturants, setlistOfResturants] = useState([]);
+  
   const [searchText, setSearchText] = useState(" ");
+
+
+  //Whenever state var update, react trigger a reconciliation cycle(re-render the components)
+  console.log("Body Rendered")
 
   //  Body Render first then useEffect()
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   async function fetchData() {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.2403305&lng=73.1305395&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    // console.log( " Hey API !! ",json);
     setlistOfResturants(
-      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
-    //console.log(listOfResturants)
   }
 
-  return listOfResturants && listOfResturants.length === 0 ? (
+  return !listOfResturants || listOfResturants.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
@@ -40,7 +43,13 @@ const Body = () => {
 
           <button
             onClick={() => {
-            //Filter the restraunts by name and update UI
+              // Filter the restaurants by name and update UI
+              // Add your filtering logic here
+
+              const filteredRestaurants = listOfResturants.filter(
+                (res) => res.info.name.toLowerCase().includes(searchText.toLowerCase())
+              );
+              setlistOfResturants(filteredRestaurants);
             }}
           >
             Search
