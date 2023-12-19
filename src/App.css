@@ -65,3 +65,21 @@
   padding: 12px;
   margin: 10px;
 }
+
+.login-btn{
+  padding: 5px;
+  width: 100px;
+  height : 70px;
+  cursor: pointer;
+}
+
+.filter{
+ display: flex;
+ justify-content: space-between;
+}
+
+.search-btn{
+  margin : 0.5%
+}
+
+
