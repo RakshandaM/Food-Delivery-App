@@ -7,10 +7,6 @@ const Body = () => {
   const [filteredRestaurants , setfilteredRestaurants] = useState([])
   
   const [searchText, setSearchText] = useState(" ");
-
-
-
-
   //Whenever state var update, react trigger a reconciliation cycle(re-render the components)
   console.log("Body Rendered")
 
@@ -88,5 +84,4 @@ const Body = () => {
     </div>
   );
 };
-
 export default Body;
