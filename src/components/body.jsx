@@ -4,8 +4,11 @@ import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [listOfResturants, setlistOfResturants] = useState([]);
+  const [filteredRestaurants , setfilteredRestaurants] = useState([])
   
   const [searchText, setSearchText] = useState(" ");
+
+
 
 
   //Whenever state var update, react trigger a reconciliation cycle(re-render the components)
@@ -22,8 +25,9 @@ const Body = () => {
     );
     const json = await data.json();
     setlistOfResturants(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      setfilteredRestaurants (
+        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   }
 
   return !listOfResturants || listOfResturants.length === 0 ? (
@@ -46,10 +50,10 @@ const Body = () => {
               // Filter the restaurants by name and update UI
               // Add your filtering logic here
 
-              const filteredRestaurants = listOfResturants.filter(
+              const filteredRes = listOfResturants.filter(
                 (res) => res.info.name.toLowerCase().includes(searchText.toLowerCase())
               );
-              setlistOfResturants(filteredRestaurants);
+              setfilteredRestaurants(filteredRes);
             }}
           >
             Search
@@ -70,7 +74,7 @@ const Body = () => {
       </div>
       <div className="res-container">
         {
-          listOfResturants.map(
+          filteredRestaurants.map(
             (
               restaurant //map() function iterates over each element of resList
             ) => (
