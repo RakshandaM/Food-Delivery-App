@@ -4,7 +4,7 @@ import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [listOfResturants, setlistOfResturants] = useState([]);
-  const [filteredRestaurants , setfilteredRestaurants] = useState([])
+  const [filteredRestaurants , setfilteredRestaurants] = useState([]) //Filter and search
   
   const [searchText, setSearchText] = useState(" ");
   //Whenever state var update, react trigger a reconciliation cycle(re-render the components)
@@ -58,11 +58,13 @@ const Body = () => {
         <button
           className="filter-btn"
           onClick={() => {
+            //const listOfResturants = [];
             const topRatedRestaurants = listOfResturants.filter(
               // topRatedRestaurants use to store the result of filtering the resList
               (res) => res.info.avgRating > 4
             );
-            setlistOfResturants(topRatedRestaurants);
+            setfilteredRestaurants(topRatedRestaurants);
+            console.log('Top-rated restaurants:', topRatedRestaurants);
           }}
         >
           Top Rated Restaurant
