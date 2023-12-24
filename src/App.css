@@ -96,35 +96,6 @@
 }
 
 
-/* Basic styles for the accordion */
-.menu {
-  font-family: Arial, sans-serif;
-}
-
-.accordion-header {
-  cursor: pointer;
-  background-color: #f4f4f4;
-  padding: 10px;
-  margin: 0;
-}
-
-.accordion-header.active {
-  background-color: #ddd;
-}
-
-.accordion-content {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.accordion-content.hide {
-  display: none;
-}
-
-.accordion-content li {
-  padding: 5px 10px;
-}
 
 
 

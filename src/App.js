@@ -5,7 +5,7 @@ import React from 'react';
 import About from './components/About';
 import Error from './Error';
 import Contact from './components/Contact';
-import ResturantMenu from './components/ResturantsMenu';
+import RestaurantMenu from './components/ResturantMenu';
 import { createBrowserRouter ,  Outlet } from 'react-router-dom'
 
 
@@ -36,8 +36,8 @@ export const appRouter = createBrowserRouter ([
         element : <Contact />
       },
       {
-        path : "/resturants/:resId",   //Different paths for all the resturants ===== Dynamic router
-        element : <ResturantMenu/>
+         path : "/resturants/:resId",
+         element : <RestaurantMenu/>
       }
     ],
     errorElement : <Error />
