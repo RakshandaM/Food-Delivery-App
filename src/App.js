@@ -4,28 +4,45 @@ import Body from './components/body';
 import React from 'react';
 import About from './components/About';
 import Error from './Error';
-import { createBrowserRouter , RouterProvider } from 'react-router-dom'
+import Contact from './components/Contact';
+import ResturantMenu from './components/ResturantsMenu';
+import { createBrowserRouter ,  Outlet } from 'react-router-dom'
 
 
 function App() {
   return (
     <div>
       <Header/>
-      <Body/>
+      <Outlet/>  
     </div>
   );
 };
 
 export const appRouter = createBrowserRouter ([
   {
-    path : '/' ,
+    path : '' ,
     element : <App />,
+    children :[
+      {
+        path : "/",
+        element : <Body/>
+      },
+      {
+        path : '/about',
+        element : <About/>
+      },
+      {
+        path : "/contact",
+        element : <Contact />
+      },
+      {
+        path : "/resturants/:resId",   //Different paths for all the resturants ===== Dynamic router
+        element : <ResturantMenu/>
+      }
+    ],
     errorElement : <Error />
   },
-  {
-    path : '/about',
-    element : <About/>
-  },
+
 ])
 
 export default App;
