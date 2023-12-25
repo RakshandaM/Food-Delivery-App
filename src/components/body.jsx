@@ -1,14 +1,15 @@
 import RestaurantCard from "./Resturant Card";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [listOfResturants, setlistOfResturants] = useState([]);
-  const [filteredRestaurants , setfilteredRestaurants] = useState([]) //Filter and search
-  
+  const [filteredRestaurants, setfilteredRestaurants] = useState([]); //Filter and search
+
   const [searchText, setSearchText] = useState(" ");
   //Whenever state var update, react trigger a reconciliation cycle(re-render the components)
-  console.log("Body Rendered")
+  console.log("Body Rendered");
 
   //  Body Render first then useEffect()
   useEffect(() => {
@@ -21,9 +22,11 @@ const Body = () => {
     );
     const json = await data.json();
     setlistOfResturants(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-      setfilteredRestaurants (
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setfilteredRestaurants(
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   }
 
   return !listOfResturants || listOfResturants.length === 0 ? (
@@ -46,8 +49,8 @@ const Body = () => {
               // Filter the restaurants by name and update UI
               // Add your filtering logic here
 
-              const filteredRes = listOfResturants.filter(
-                (res) => res.info.name.toLowerCase().includes(searchText.toLowerCase())
+              const filteredRes = listOfResturants.filter((res) =>
+                res.info.name.toLowerCase().includes(searchText.toLowerCase())
               );
               setfilteredRestaurants(filteredRes);
             }}
@@ -64,24 +67,21 @@ const Body = () => {
               (res) => res.info.avgRating > 4
             );
             setfilteredRestaurants(topRatedRestaurants);
-            console.log('Top-rated restaurants:', topRatedRestaurants);
+            console.log("Top-rated restaurants:", topRatedRestaurants);
           }}
         >
           Top Rated Restaurant
         </button>
       </div>
       <div className="res-container">
-        {
-          filteredRestaurants.map(
-            (
-              restaurant //map() function iterates over each element of resList
-            ) => (
-              <RestaurantCard key={restaurant.info.id} resData={restaurant} />
-            )
-          )
-          //Restaurant - It represents a single item.
-          // resData -  It holds the data of a single restaurant.
-        }
+        {filteredRestaurants.map((restaurant) => (
+          <Link
+            key={restaurant.info.id}
+            to={"/resturants/" + restaurant.info.id}
+          >
+           <RestaurantCard resData={restaurant} />
+          </Link>
+        ))}
       </div>
     </div>
   );
