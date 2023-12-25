@@ -11,7 +11,7 @@ import { createBrowserRouter ,  Outlet } from 'react-router-dom'
 
 function App() {
   return (
-    <div  className='main' >
+    <div >
       <Header/>
       <Outlet/>  
     </div>
