@@ -1,40 +1,38 @@
 import { useEffect, useState } from "react";
-
-
+import Shimmer from "./Shimmer";
 
 const RestaurantMenu = () => {
+  const [resId, setResID] = useState(null);
 
-    const[resId,setResID] = useState(null)
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    useEffect(() => {
-        fetchData();
-      }, [ ]);
+  async function fetchData() {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=19.26023&lng=73.136701&restaurantId=75536&catalog_qa=undefined&submitAction=ENTER%27"
+    );
+    const json = await data.json();
+    //console.log(json)
 
-    async function fetchData(){
-    const data = await fetch('https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=19.26023&lng=73.136701&restaurantId=75536&catalog_qa=undefined&submitAction=ENTER%27');
-    const json= await data.json();
-    //console.log(json) 
-   
     setResID(json);
-    }; // Real data
+  } // Real data
 
-    
+  
+  if (resId === 0) return <Shimmer />;
+
+  const { name } = resId?.data?.cards[0]?.card?.card?.info || {}; ; // Use default empty object to prevent errors
+  
   return (
     <div className="menu">
-   <h1>{resId?.data?.cards[0]?.card?.card?.info?.name}</h1>
-    <h2>Menu</h2>
+      <h1>{name}</h1>
+      <h2>Menu</h2>
     </div>
   );
 }
+  
 
-export default RestaurantMenu;
-
-
-// import React, { useState, useEffect } from 'react';
-
-
-
-
+  export default RestaurantMenu;
 // function YourComponent() {
 //   const [resId, setResID] = useState(null);
 
@@ -69,8 +67,3 @@ export default RestaurantMenu;
 // }
 
 // export default YourComponent;
-
-
-
-
-
