@@ -23,8 +23,9 @@ const RestaurantMenu = () => {
   const { name, cuisines, costForTwoMessage, city } =
     resId?.data?.cards[0]?.card?.card?.info || {}; // Use default empty object to prevent errors
 
-
-
+  const { itemCards } =
+    resId?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
+      ?.card || {};
 
   return (
     <div className="menu">
@@ -36,10 +37,9 @@ const RestaurantMenu = () => {
 
       <ul>
         <li>
-          {
-            resId?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards[0]?.card?.info?.name 
-          }
- 
+          {/* {itemCards && itemCards[0]?.card?.info?.name} */}
+          {itemCards &&
+            itemCards.map((item) => <li>{item.card.info.name}</li>)}{" "}
         </li>
       </ul>
     </div>
