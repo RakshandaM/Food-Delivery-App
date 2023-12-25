@@ -13,26 +13,40 @@ const RestaurantMenu = () => {
       "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=19.26023&lng=73.136701&restaurantId=75536&catalog_qa=undefined&submitAction=ENTER%27"
     );
     const json = await data.json();
-    //console.log(json)
+    console.log(json);
 
     setResID(json);
   } // Real data
 
-  
   if (resId === 0) return <Shimmer />;
 
-  const { name } = resId?.data?.cards[0]?.card?.card?.info || {}; ; // Use default empty object to prevent errors
-  
+  const { name, cuisines, costForTwoMessage, city } =
+    resId?.data?.cards[0]?.card?.card?.info || {}; // Use default empty object to prevent errors
+
+
+
+
   return (
     <div className="menu">
       <h1>{name}</h1>
-      <h2>Menu</h2>
+      <p>{Array.isArray(cuisines) ? cuisines.join(", ") : null}</p>
+      <p>{costForTwoMessage}</p>
+      <p>{city}</p>
+      <h1>Menu</h1>
+
+      <ul>
+        <li>
+          {
+            resId?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards[0]?.card?.info?.name 
+          }
+ 
+        </li>
+      </ul>
     </div>
   );
-}
-  
+};
 
-  export default RestaurantMenu;
+export default RestaurantMenu;
 // function YourComponent() {
 //   const [resId, setResID] = useState(null);
 
