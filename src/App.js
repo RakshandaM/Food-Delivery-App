@@ -36,11 +36,11 @@ export const appRouter = createBrowserRouter ([
         element : <Contact />
       },
       {
-         path : "/resturants/:resId",
+         path : "/resturants/:resNo",
          element : <RestaurantMenu/>
       }
     ],
-    // errorElement : <Error />
+    errorElement : <Error />
   },
 
 ])
